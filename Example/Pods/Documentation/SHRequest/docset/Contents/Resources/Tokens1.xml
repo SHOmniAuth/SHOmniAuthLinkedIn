@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/SHRequest.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/SHRequest</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/SHRequest/requestForServiceType:requestMethod:URL:parameters:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>+ (SHRequest *)requestForServiceType:(NSString *)serviceType requestMethod:(SHRequestMethod)requestMethod URL:(NSURL *)url parameters:(NSDictionary *)parameters</Declaration>
+			
+			
+			<Anchor>//api/name/requestForServiceType:requestMethod:URL:parameters:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/setAccount:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, retain) id&lt;&gt; account</Declaration>
+			
+			
+			<Anchor>//api/name/account</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SHRequest/account</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, retain) id&lt;&gt; account</Declaration>
+			
+			
+			<Anchor>//api/name/account</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/setRequestMethod:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) SHRequestMethod requestMethod</Declaration>
+			
+			
+			<Anchor>//api/name/requestMethod</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SHRequest/requestMethod</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) SHRequestMethod requestMethod</Declaration>
+			
+			
+			<Anchor>//api/name/requestMethod</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/setURL:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) NSURL *URL</Declaration>
+			
+			
+			<Anchor>//api/name/URL</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SHRequest/URL</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) NSURL *URL</Declaration>
+			
+			
+			<Anchor>//api/name/URL</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/setParameters:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) NSDictionary *parameters</Declaration>
+			
+			
+			<Anchor>//api/name/parameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/SHRequest/parameters</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>@property (NS_NONATOMIC_IOSONLY, readonly) NSDictionary *parameters</Declaration>
+			
+			
+			<Anchor>//api/name/parameters</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/preparedURLRequest</TokenIdentifier>
+			<Abstract type="html">/ Specify a named MIME multi-part value. As of iOS 6.0, if you set parameters,
+/ the parameters will automatically be added as form data in the multi-part data.</Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>- (NSURLRequest *)preparedURLRequest</Declaration>
+			
+			
+			<Anchor>//api/name/preparedURLRequest</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/SHRequest/performRequestWithHandler:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>SHRequest.h</DeclaredIn>			
+			
+			<Declaration>- (void)performRequestWithHandler:(SHRequestHandler)handler</Declaration>
+			
+			
+			<Anchor>//api/name/performRequestWithHandler:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

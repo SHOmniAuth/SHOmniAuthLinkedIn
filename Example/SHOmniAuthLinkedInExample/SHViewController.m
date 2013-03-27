@@ -7,23 +7,36 @@
 //
 
 #import "SHViewController.h"
-
+#import "SHOmniAuthLinkedIn.h"
+#import "UIActionSheet+BlocksKit.h"
+#import "NSArray+BlocksKit.h"
 @interface SHViewController ()
 
 @end
 
 @implementation SHViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewDidAppear:(BOOL)animated; {
+  [super viewDidAppear:animated];
+  [SHOmniAuthLinkedIn performLoginWithListOfAccounts:^(NSArray *accounts, SHOmniAuthAccountPickerHandler pickAccountBlock) { UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick twitter account"];
+    [accounts each:^(id<account> account) {
+      [actionSheet addButtonWithTitle:account.username handler:^{
+        pickAccountBlock(account);
+      }];
+    }];
+    if(accounts.count < 1)
+      pickAccountBlock(nil);
+    else {
+      [actionSheet addButtonWithTitle:@"Add Account" handler:^{
+        pickAccountBlock(nil);
+      }];
+      [actionSheet showFromTabBar:self.tabBarController.tabBar];
+    }
+    
+    
+  } onComplete:^(id<account> account, id response, NSError *error, BOOL isSuccess) {
+    NSLog(@"%@", response);
+  }];
 }
 
 @end
