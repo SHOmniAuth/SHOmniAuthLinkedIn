@@ -12,14 +12,14 @@ Pod::Spec.new do |s|
   s.license      = {:type => 'MIT' } 
   s.author       = { "Seivan Heidari" => "seivan.heidari@icloud.com" }
   
-  s.source       = { :git => "https://github.com/seivan/SHOmniAuthLinkedIn.git", :tag => "0.0.1"}
+  s.source       = { :git => "https://github.com/seivan/SHOmniAuthLinkedIn.git", s.version.to_s}
   s.platform     = :ios, '5.0'
 
   s.source_files = 'SHOmniAuthLinkedIn/**/*.{h,m}'
   s.requires_arc = true
 
   s.dependency  'AFLinkedInOAuth1Client'
-  s.dependency  'SHOmniAuth', :git => "https://github.com/seivan/SHOmniAuth.git", :tag => "0.0.1"
-  s.dependency  'SHAccountStore', :git => "https://github.com/seivan/SHAccountStore.git", :tag => "0.0.1"
-  s.dependency  'SHRequest', :git => "https://github.com/seivan/SHRequest.git", :tag => "0.0.1"
+  s.dependency  'SHOmniAuth',     '~> 0.0.1'
+  s.dependency  'SHAccountStore', '~> 0.0.1'
+  s.dependency  'SHRequest',      '~> 0.0.1'
 end
