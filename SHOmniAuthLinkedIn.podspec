@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SHOmniAuthLinkedIn"
-  s.version      = "0.0.1"
+  s.version      = "0.1.0"
   s.summary      = "LinkedIn Strategy for SHOmniAuth, uses SHAccountStore."
 
   s.description  = <<-DESC
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.dependency  'AFLinkedInOAuth1Client'
-  s.dependency  'SHOmniAuth',     '~> 0.0.1'
-  s.dependency  'SHAccountStore', '~> 0.0.1'
+  s.dependency  'SHOmniAuth',     '~> 0.1.0'
+  s.dependency  'SHAccountStore', '~> 0.1.0'
   s.dependency  'SHRequest',      '~> 0.0.1'
 end
