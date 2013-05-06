@@ -74,7 +74,7 @@
 //  NSAssert(self.account, @"Must have an account");
   [NSURLConnection sendAsynchronousRequest:self.currentRequest queue:[NSOperationQueue mainQueue]
                          completionHandler:^(NSURLResponse * response, NSData * data, NSError * error) {
-                           handler(data, (NSHTTPURLResponse*)response, error.copy);
+                           handler(data, (NSHTTPURLResponse*)response, error);
   }];
 }
 

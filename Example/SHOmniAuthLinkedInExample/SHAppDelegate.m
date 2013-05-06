@@ -10,10 +10,14 @@
 #import "SHOmniAuth.h"
 #import "SHOmniAuthLinkedIn.h"
 #import "AFOAuth1Client.h"
+#import "LUKeychainAccess.h"
 
 @implementation SHAppDelegate
 
 -(BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions; {
+//  LUKeychainAccess * keychain = [LUKeychainAccess standardKeychainAccess];
+//  [keychain setObject:@{} forKey:@"kAccountStoreDicitonaryKey"];
+
   [SHOmniAuth registerProvidersWith:^(SHOmniAuthProviderBlock provider) {
     provider(SHOmniAuthLinkedIn.provider, @"cqdugmi6e8w2", @"glyv6c7GnzD0eIUR", nil, @"example-oauth-linkedin://success");
   }];
