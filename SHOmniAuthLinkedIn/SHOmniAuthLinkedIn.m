@@ -155,6 +155,7 @@
 
 +(NSDictionary *)authHashWithResponse:(NSDictionary *)theResponse; {
   
+  NSString * name = [NSString stringWithFormat:@"%@ %@", theResponse[@"firstName"], theResponse[@"lastName"]];
   NSDictionary * omniAuthHash = @{@"auth" :
                                   @{@"credentials" : @{@"secret" : NSNullIfNil(theResponse[@"oauth_token_secret"]),
                                                      @"token"  : NSNullIfNil(theResponse[@"oauth_token"])
@@ -167,13 +168,12 @@
                                               @"headline"     : NSNullIfNil(theResponse[@"headline"]),
                                               @"industry"     : NSNullIfNil(theResponse[@"industry"]),
                                               @"image"        : NSNullIfNil(theResponse[@"profile_image_url"]),
-                                              @"name"         : NSNullIfNil(theResponse[@"name"]),
+                                              @"name"         : NSNullIfNil(name),
                                               @"urls"         : @{@"public_profile" : NSNullIfNil(theResponse[@"publicProfileUrl"]) },
                                               
                                               },
                                   @"provider" : @"linkedin",
                                   @"uid"      : NSNullIfNil(theResponse[@"id"]),
-                                  @"email"    : NSNullIfNil(theResponse[@"email"]),
                                   @"raw_info" : NSNullIfNil(theResponse)
                                     },
                                   @"email"    : NSNullIfNil(theResponse[@"email"]),
