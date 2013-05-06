@@ -18,7 +18,7 @@
 
 -(void)viewDidAppear:(BOOL)animated; {
   [super viewDidAppear:animated];
-  [SHOmniAuthLinkedIn performLoginWithListOfAccounts:^(NSArray *accounts, SHOmniAuthAccountPickerHandler pickAccountBlock) { UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick twitter account"];
+  [SHOmniAuthLinkedIn performLoginWithListOfAccounts:^(NSArray *accounts, SHOmniAuthAccountPickerHandler pickAccountBlock) { UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick linkedin account"];
     [accounts each:^(id<account> account) {
       [actionSheet addButtonWithTitle:account.username handler:^{
         pickAccountBlock(account);

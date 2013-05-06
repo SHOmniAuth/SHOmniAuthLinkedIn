@@ -19,11 +19,14 @@
 //Login dependency
 #import "AFLinkedInOAuth1Client.h"
 
+#define NSNullIfNil(v) (v ? v : [NSNull null])
+
 
 @interface SHAccount ()
 @property (readwrite, NS_NONATOMIC_IOSONLY) NSString      *identifier;
 +(void)updateAccount:(SHAccount *)theAccount withCompleteBlock:(SHOmniAuthAccountResponseHandler)completeBlock;
 +(void)performLoginForNewAccount:(SHOmniAuthAccountResponseHandler)completionBlock;
++(NSDictionary *)authHashWithResponse:(NSDictionary *)theResponse;
 @end
 
 @interface SHOmniAuthLinkedIn ()
@@ -111,12 +114,21 @@
   SHAccountType  * accountType  = [accountStore accountTypeWithAccountTypeIdentifier:self.accountTypeIdentifier];
   [accountStore requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
     if(granted) {
-      SHRequest * request=  [SHRequest requestForServiceType:theAccount.accountType.identifier requestMethod:SHRequestMethodGET URL:[NSURL URLWithString:@"https://api.linkedin.com/v1/people/~:(id,first-name,last-name)?format=json"] parameters:nil];
+      NSString * fields = @"id,email-address,first-name,last-name,headline,industry,picture-url,public-profile-url";
+      NSString * urlString = [NSString stringWithFormat:@"https://api.linkedin.com/v1/people/~:(%@)?format=json", fields];
+
+      SHRequest * request=  [SHRequest requestForServiceType:theAccount.accountType.identifier requestMethod:SHRequestMethodGET URL:[NSURL URLWithString:urlString] parameters:nil];
       request.account = (id<account>)theAccount;
       [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
+        NSDictionary * response = nil;
+        if(responseData) response =  [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
         
-        NSDictionary * response =  [NSJSONSerialization
-                                    JSONObjectWithData:responseData options:0 error:nil];
+        if(error || [response[@"status"] integerValue] == 400 ){
+          dispatch_async(dispatch_get_main_queue(), ^{ completeBlock(nil, nil, error, NO); });
+          return;
+        }
+        
+        
         
         theAccount.username = [NSString stringWithFormat:@"%@_%@", response[@"firstName"], response[@"lastName"]];
         theAccount.identifier = response[@"id"];
@@ -126,7 +138,9 @@
           id<accountPrivate> privateAccount = (id<accountPrivate>)theAccount;
           fullResponse[@"oauth_token"] = privateAccount.credential.token;
           fullResponse[@"oauth_token_secret"] = privateAccount.credential.secret;
-          dispatch_async(dispatch_get_main_queue(), ^{ completeBlock((id<account>)theAccount, fullResponse.copy, error, success); });
+          
+          
+          dispatch_async(dispatch_get_main_queue(), ^{ completeBlock((id<account>)theAccount, [self authHashWithResponse:fullResponse], error, success); });
         }];
         
       }];
@@ -136,6 +150,37 @@
       dispatch_async(dispatch_get_main_queue(), ^{ completeBlock((id<account>)theAccount, nil, error, granted); });
     
   }];
+  
+}
+
++(NSDictionary *)authHashWithResponse:(NSDictionary *)theResponse; {
+  
+  NSString * name = [NSString stringWithFormat:@"%@ %@", theResponse[@"firstName"], theResponse[@"lastName"]];
+  NSDictionary * omniAuthHash = @{@"auth" :
+                                  @{@"credentials" : @{@"secret" : NSNullIfNil(theResponse[@"oauth_token_secret"]),
+                                                     @"token"  : NSNullIfNil(theResponse[@"oauth_token"])
+                                                     },
+                                  
+                                  @"info" : @{@"description"  : NSNullIfNil(theResponse[@"headline"]),
+                                              @"email"        : NSNullIfNil(theResponse[@"email"]),
+                                              @"first_name"   : NSNullIfNil(theResponse[@"firstName"]),
+                                              @"last_name"    : NSNullIfNil(theResponse[@"lastName"]),
+                                              @"headline"     : NSNullIfNil(theResponse[@"headline"]),
+                                              @"industry"     : NSNullIfNil(theResponse[@"industry"]),
+                                              @"image"        : NSNullIfNil(theResponse[@"profile_image_url"]),
+                                              @"name"         : NSNullIfNil(name),
+                                              @"urls"         : @{@"public_profile" : NSNullIfNil(theResponse[@"publicProfileUrl"]) },
+                                              
+                                              },
+                                  @"provider" : @"linkedin",
+                                  @"uid"      : NSNullIfNil(theResponse[@"id"]),
+                                  @"raw_info" : NSNullIfNil(theResponse)
+                                    },
+                                  @"email"    : NSNullIfNil(theResponse[@"email"]),
+                                  };
+  
+  
+  return omniAuthHash;
   
 }
 
