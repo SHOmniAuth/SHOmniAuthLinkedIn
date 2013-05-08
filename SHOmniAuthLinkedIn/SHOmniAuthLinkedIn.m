@@ -93,7 +93,10 @@
                                                            [SHOmniAuth providerValue:SHOmniAuthProviderValueCallbackUrl
                                                                          forProvider:self.provider]]
                                           accessTokenPath:@"uas/oauth/accessToken"
-                                             accessMethod:@"POST" success:^(AFOAuth1Token *accessToken) {
+                                             accessMethod:@"POST"
+                                                    scope:[SHOmniAuth providerValue:SHOmniAuthProviderValueScope
+                                                                        forProvider:self.provider]
+                                                  success:^(AFOAuth1Token *accessToken, id responseObject) {
                                                //Remove observer!
                                                SHAccountCredential * credential = [[SHAccountCredential alloc]
                                                                                    initWithOAuthToken:accessToken.key
