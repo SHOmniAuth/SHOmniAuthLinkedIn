@@ -1,4 +1,4 @@
 Documentation set was installed to Xcode!
 
-Path: /Users/seivan/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.AFLinkedInOAuth1Client-0.0.2.docset
-Time: 2013-03-27 18:42:01 +0000
+Path: /Users/seivan/Library/Developer/Shared/Documentation/DocSets/org.cocoapods.aflinkedinoauth1client.AFLinkedInOAuth1Client-0.0.3.docset
+Time: 2013-05-08 14:08:38 +0000
