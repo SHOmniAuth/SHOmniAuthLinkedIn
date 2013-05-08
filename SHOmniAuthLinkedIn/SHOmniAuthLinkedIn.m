@@ -26,7 +26,7 @@
 @property (readwrite, NS_NONATOMIC_IOSONLY) NSString      *identifier;
 +(void)updateAccount:(SHAccount *)theAccount withCompleteBlock:(SHOmniAuthAccountResponseHandler)completeBlock;
 +(void)performLoginForNewAccount:(SHOmniAuthAccountResponseHandler)completionBlock;
-+(NSDictionary *)authHashWithResponse:(NSDictionary *)theResponse;
++(NSMutableDictionary *)authHashWithResponse:(NSDictionary *)theResponse;
 @end
 
 @interface SHOmniAuthLinkedIn ()
@@ -153,13 +153,13 @@
   
 }
 
-+(NSDictionary *)authHashWithResponse:(NSDictionary *)theResponse; {
++(NSMutableDictionary *)authHashWithResponse:(NSDictionary *)theResponse; {
   
   NSString * name = [NSString stringWithFormat:@"%@ %@", theResponse[@"firstName"], theResponse[@"lastName"]];
-  NSDictionary * omniAuthHash = @{@"auth" :
+  NSMutableDictionary * omniAuthHash = @{@"auth" :
                                   @{@"credentials" : @{@"secret" : NSNullIfNil(theResponse[@"oauth_token_secret"]),
                                                      @"token"  : NSNullIfNil(theResponse[@"oauth_token"])
-                                                     },
+                                                     }.mutableCopy,
                                   
                                   @"info" : @{@"description"  : NSNullIfNil(theResponse[@"headline"]),
                                               @"email"        : NSNullIfNil(theResponse[@"email"]),
@@ -169,15 +169,16 @@
                                               @"industry"     : NSNullIfNil(theResponse[@"industry"]),
                                               @"image"        : NSNullIfNil(theResponse[@"profile_image_url"]),
                                               @"name"         : NSNullIfNil(name),
-                                              @"urls"         : @{@"public_profile" : NSNullIfNil(theResponse[@"publicProfileUrl"]) },
+                                              @"urls"         : @{@"public_profile" : NSNullIfNil(theResponse[@"publicProfileUrl"])
+                                                                  }.mutableCopy,
                                               
-                                              },
+                                              }.mutableCopy,
                                   @"provider" : @"linkedin",
                                   @"uid"      : NSNullIfNil(theResponse[@"id"]),
                                   @"raw_info" : NSNullIfNil(theResponse)
-                                    },
+                                    }.mutableCopy,
                                   @"email"    : NSNullIfNil(theResponse[@"email"]),
-                                  };
+                                  }.mutableCopy;
   
   
   return omniAuthHash;
