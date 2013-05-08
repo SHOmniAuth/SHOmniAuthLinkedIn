@@ -10,7 +10,7 @@
 #define COCOAPODS_POD_AVAILABLE_AFLinkedInOAuth1Client
 #define COCOAPODS_VERSION_MAJOR_AFLinkedInOAuth1Client 0
 #define COCOAPODS_VERSION_MINOR_AFLinkedInOAuth1Client 0
-#define COCOAPODS_VERSION_PATCH_AFLinkedInOAuth1Client 2
+#define COCOAPODS_VERSION_PATCH_AFLinkedInOAuth1Client 3
 
 // AFNetworking
 #define COCOAPODS_POD_AVAILABLE_AFNetworking

@@ -5,9 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.cocoapods.AFLinkedInOAuth1Client-0.0.2</string>
+	<string>org.cocoapods.aflinkedinoauth1client.AFLinkedInOAuth1Client-0.0.3</string>
 	<key>CFBundleName</key>
-	<string>AFLinkedInOAuth1Client 0.0.2 Documentation</string>
+	<string>AFLinkedInOAuth1Client 0.0.3 Documentation</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -18,7 +18,7 @@
 	<string>AFOAuth1Client for LinkedIn.</string>
 	
 	<key>DocSetFeedName</key>
-	<string>AFLinkedInOAuth1Client 0.0.2 Documentation</string>
+	<string>AFLinkedInOAuth1Client 0.0.3 Documentation</string>
 	
 	<key>DocSetMinimumXcodeVersion</key>
 	<string>3.0</string>
@@ -26,7 +26,7 @@
 	<key>DashDocSetFamily</key>
 	<string>appledoc</string>
 	<key>DocSetPublisherIdentifier</key>
-	<string>org.cocoapods.documentation</string>
+	<string>org.cocoapods.aflinkedinoauth1client.documentation</string>
 	<key>DocSetPublisherName</key>
 	<string>PJ Gray</string>
 	<key>NSHumanReadableCopyright</key>
