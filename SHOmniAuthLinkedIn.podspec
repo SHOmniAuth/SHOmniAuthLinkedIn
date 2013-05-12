@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "SHOmniAuthLinkedIn"
-  s.version      = "0.2.1"
+  s.version      = "0.2.2"
   s.summary      = "LinkedIn Strategy for SHOmniAuth, uses SHAccountStore."
 
   s.description  = <<-DESC
