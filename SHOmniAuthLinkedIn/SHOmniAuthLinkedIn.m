@@ -24,13 +24,12 @@
 
 @interface SHAccount ()
 @property (readwrite, NS_NONATOMIC_IOSONLY) NSString      *identifier;
-+(void)updateAccount:(SHAccount *)theAccount withCompleteBlock:(SHOmniAuthAccountResponseHandler)completeBlock;
-+(void)performLoginForNewAccount:(SHOmniAuthAccountResponseHandler)completionBlock;
-+(NSMutableDictionary *)authHashWithResponse:(NSDictionary *)theResponse;
 @end
 
 @interface SHOmniAuthLinkedIn ()
-
++(void)updateAccount:(SHAccount *)theAccount withCompleteBlock:(SHOmniAuthAccountResponseHandler)completeBlock;
++(void)performLoginForNewAccount:(SHOmniAuthAccountResponseHandler)completionBlock;
++(NSMutableDictionary *)authHashWithResponse:(NSDictionary *)theResponse;
 @end
 
 @implementation SHOmniAuthLinkedIn
