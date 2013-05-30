@@ -1,12 +1,10 @@
 PODS:
-  - AFLinkedInOAuth1Client (0.0.3):
-    - AFOAuth1Client (~> 0.2.0)
-  - AFNetworking (1.2.1)
+  - AFNetworking (1.3.0)
   - AFOAuth1Client (0.2.0):
     - AFNetworking (>= 1.0)
   - BlocksKit (1.8.2):
     - libffi
-  - libffi (3.0.11)
+  - libffi (3.0.13)
   - LUKeychainAccess (1.0.1)
   - NSData+Base64 (1.0.0)
   - OAuthCore (0.0.1):
@@ -16,8 +14,8 @@ PODS:
     - LUKeychainAccess
   - SHOmniAuth (0.1.1):
     - LUKeychainAccess
-  - SHOmniAuthLinkedIn (0.2.1):
-    - AFLinkedInOAuth1Client (~> 0.0.3)
+  - SHOmniAuthLinkedIn (0.2.2):
+    - AFOAuth1Client (~> 0.2.0)
     - SHAccountStore (~> 0.1.0)
     - SHOmniAuth (~> 0.1.0)
     - SHRequest (~> 0.1.0)
@@ -34,17 +32,16 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  AFLinkedInOAuth1Client: a4e9d7af2a93668be256a01d86505693a79f601e
-  AFNetworking: 616da0028916ce296f5c3cef74e5552eb4e10e13
+  AFNetworking: e528f20d06b1b818c3571266fb5efa20031a8ace
   AFOAuth1Client: 3e01e6e4218116c2e279671c8ab086133514a350
   BlocksKit: 7396526b0816734103f6133fbb1a520c8b04e80c
-  libffi: 8a1d9ba43c0c84b546b42c6f742714e73aa07ae1
+  libffi: 64ef39353e747bb2b25e1026afd96a157bf9231c
   LUKeychainAccess: 6ba22b2e1eec24f9f2fc9c6a9087d5524a58b1a2
   NSData+Base64: 36c4e5b6479259c1a68866ccd2a8dd385c9744f7
   OAuthCore: 4164eec5e28c68f794953446e68f91054ffe570c
   SHAccountStore: 72b58b8d0055a810a196618cf7e2be269d71d1c7
   SHOmniAuth: afd6278ea528acc0569bdee94c2185b03457b357
-  SHOmniAuthLinkedIn: 2d48844715d5048a70bacf0ac942fbf348c51abb
+  SHOmniAuthLinkedIn: 764de8e42e1d38f21b40abe5d257c63375a073ab
   SHRequest: 47b9393c6dbf294a08621581c2ec5cf7ee2bd6df
 
-COCOAPODS: 0.19.1
+COCOAPODS: 0.20.2
