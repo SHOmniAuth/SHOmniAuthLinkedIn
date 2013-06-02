@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
 
   s.description  = <<-DESC
                     A strategy for authenticating with LinkedIn via SHOmniAuth.
-                    Uses SHAccountStore.
+                    Uses SHAccountStore & SHRequest.
                    DESC
   s.homepage     = "https://github.com/seivan/SHOmniAuthLinkedIn"
 
