@@ -12,16 +12,16 @@ PODS:
   - SHAccountStore (0.1.0):
     - BlocksKit
     - LUKeychainAccess
-  - SHOmniAuth (0.1.1):
+  - SHOmniAuth (0.2.0):
     - LUKeychainAccess
-  - SHOmniAuthLinkedIn (0.2.2):
+  - SHOmniAuthLinkedIn (0.2.4):
     - AFOAuth1Client (~> 0.2.0)
     - SHAccountStore (~> 0.1.0)
-    - SHOmniAuth (~> 0.1.0)
-    - SHRequest (~> 0.1.0)
-  - SHRequest (0.1.0):
+    - SHOmniAuth (~> 0.2.0)
+    - SHRequest (~> 0.2.0)
+  - SHRequest (0.2.0):
     - OAuthCore
-    - SHOmniAuth (~> 0.1.0)
+    - SHOmniAuth (~> 0.2.0)
 
 DEPENDENCIES:
   - BlocksKit
@@ -40,8 +40,8 @@ SPEC CHECKSUMS:
   NSData+Base64: 36c4e5b6479259c1a68866ccd2a8dd385c9744f7
   OAuthCore: 4164eec5e28c68f794953446e68f91054ffe570c
   SHAccountStore: 72b58b8d0055a810a196618cf7e2be269d71d1c7
-  SHOmniAuth: afd6278ea528acc0569bdee94c2185b03457b357
-  SHOmniAuthLinkedIn: b09b8b3056046d66b507fcf1d37fff49f849a03f
-  SHRequest: 47b9393c6dbf294a08621581c2ec5cf7ee2bd6df
+  SHOmniAuth: 8d1d51375baba5eb78d9054df17737ea7e16aa97
+  SHOmniAuthLinkedIn: dd71d881b97eb44989108baa28f0d6e1263857ee
+  SHRequest: ec06e0975f2b1df0d66c7ae0beb933a9ed79c170
 
 COCOAPODS: 0.20.2
