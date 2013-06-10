@@ -6,17 +6,11 @@
 // project.
 
 
-// AFLinkedInOAuth1Client
-#define COCOAPODS_POD_AVAILABLE_AFLinkedInOAuth1Client
-#define COCOAPODS_VERSION_MAJOR_AFLinkedInOAuth1Client 0
-#define COCOAPODS_VERSION_MINOR_AFLinkedInOAuth1Client 0
-#define COCOAPODS_VERSION_PATCH_AFLinkedInOAuth1Client 3
-
 // AFNetworking
 #define COCOAPODS_POD_AVAILABLE_AFNetworking
 #define COCOAPODS_VERSION_MAJOR_AFNetworking 1
-#define COCOAPODS_VERSION_MINOR_AFNetworking 2
-#define COCOAPODS_VERSION_PATCH_AFNetworking 1
+#define COCOAPODS_VERSION_MINOR_AFNetworking 3
+#define COCOAPODS_VERSION_PATCH_AFNetworking 0
 
 // AFOAuth1Client
 #define COCOAPODS_POD_AVAILABLE_AFOAuth1Client
@@ -64,7 +58,7 @@
 #define COCOAPODS_POD_AVAILABLE_SHOmniAuthLinkedIn
 #define COCOAPODS_VERSION_MAJOR_SHOmniAuthLinkedIn 0
 #define COCOAPODS_VERSION_MINOR_SHOmniAuthLinkedIn 2
-#define COCOAPODS_VERSION_PATCH_SHOmniAuthLinkedIn 1
+#define COCOAPODS_VERSION_PATCH_SHOmniAuthLinkedIn 2
 
 // SHRequest
 #define COCOAPODS_POD_AVAILABLE_SHRequest
@@ -76,5 +70,5 @@
 #define COCOAPODS_POD_AVAILABLE_libffi
 #define COCOAPODS_VERSION_MAJOR_libffi 3
 #define COCOAPODS_VERSION_MINOR_libffi 0
-#define COCOAPODS_VERSION_PATCH_libffi 11
+#define COCOAPODS_VERSION_PATCH_libffi 13
 

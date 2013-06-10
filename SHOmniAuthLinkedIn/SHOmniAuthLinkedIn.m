@@ -16,8 +16,9 @@
 #import "SHAccountStore.h"
 #import "SHRequest.h"
 
-//Login dependency
-#import "AFLinkedInOAuth1Client.h"
+#import "AFOAuth1Client.h"
+
+
 
 #define NSNullIfNil(v) (v ? v : [NSNull null])
 
@@ -79,7 +80,7 @@
   SHAccountStore * store    = [[SHAccountStore alloc] init];
   SHAccountType  * type     = [store accountTypeWithAccountTypeIdentifier:self.accountTypeIdentifier];
   SHAccount      * account  = [[SHAccount alloc] initWithAccountType:type];
-  AFLinkedInOAuth1Client *  linkedInClient = [[AFLinkedInOAuth1Client alloc]
+  AFOAuth1Client *  linkedInClient = [[AFOAuth1Client alloc]
                                               initWithBaseURL:
                                               [NSURL URLWithString:@"https://api.linkedin.com/"]
                                               key:[SHOmniAuth providerValue:SHOmniAuthProviderValueKey forProvider:self.provider]
