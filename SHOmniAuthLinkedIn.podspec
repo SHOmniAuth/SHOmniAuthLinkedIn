@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   name         = "SHOmniAuthLinkedIn"
   url          = "https://github.com/seivan/#{name}"
   git_url      = "#{url}.git"
-  version      = "0.2.2"
+  version      = "0.2.3"
   source_files = "#{name}/**/*.{h,m}"
 
   s.name         = name
