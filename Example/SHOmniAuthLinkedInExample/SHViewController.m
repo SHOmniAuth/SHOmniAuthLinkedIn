@@ -11,13 +11,14 @@
 #import "UIActionSheet+BlocksKit.h"
 #import "NSArray+BlocksKit.h"
 @interface SHViewController ()
-
+-(void)performLinkedInAuth;
 @end
 
 @implementation SHViewController
 
 -(void)viewDidAppear:(BOOL)animated; {
   [super viewDidAppear:animated];
+  [self performLinkedInAuth];
 }
 
 -(void)performLinkedInAuth; {
