@@ -18,6 +18,9 @@
 
 -(void)viewDidAppear:(BOOL)animated; {
   [super viewDidAppear:animated];
+}
+
+-(void)performLinkedInAuth; {
   [SHOmniAuthLinkedIn performLoginWithListOfAccounts:^(NSArray *accounts, SHOmniAuthAccountPickerHandler pickAccountBlock) { UIActionSheet * actionSheet = [[UIActionSheet alloc] initWithTitle:@"Pick linkedin account"];
     [accounts each:^(id<account> account) {
       [actionSheet addButtonWithTitle:account.username handler:^{
@@ -36,12 +39,16 @@
     }];
     
     [actionSheet showFromTabBar:self.tabBarController.tabBar];
-
+    
     
     
   } onComplete:^(id<account> account, id response, NSError *error, BOOL isSuccess) {
     NSLog(@"%@", response);
+   dispatch_async(dispatch_get_main_queue(), ^{
+     [self performLinkedInAuth];
+   });
   }];
+
 }
 
 @end
