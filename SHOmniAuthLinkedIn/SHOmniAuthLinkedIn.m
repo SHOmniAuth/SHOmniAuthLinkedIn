@@ -40,18 +40,18 @@
                            onComplete:(SHOmniAuthAccountResponseHandler)completionBlock; {
   SHAccountStore * store = [[SHAccountStore alloc] init];
   SHAccountType  * type = [store accountTypeWithAccountTypeIdentifier:self.accountTypeIdentifier];
-  
+
   accountPickerBlock([store accountsWithAccountType:type], ^(id<account> theChosenAccount) {
-    
+
     if(theChosenAccount == nil) [self performLoginForNewAccount:completionBlock];
     else [SHOmniAuthLinkedIn updateAccount:(SHAccount *)theChosenAccount withCompleteBlock:completionBlock];
-    
+
   });
-  
-  
-  
-  
-  
+
+
+
+
+
 }
 
 
@@ -80,35 +80,38 @@
   SHAccountStore * store    = [[SHAccountStore alloc] init];
   SHAccountType  * type     = [store accountTypeWithAccountTypeIdentifier:self.accountTypeIdentifier];
   SHAccount      * account  = [[SHAccount alloc] initWithAccountType:type];
-  AFOAuth1Client *  linkedInClient = [[AFOAuth1Client alloc]
-                                              initWithBaseURL:
-                                              [NSURL URLWithString:@"https://api.linkedin.com/"]
-                                              key:[SHOmniAuth providerValue:SHOmniAuthProviderValueKey forProvider:self.provider]
-                                              secret:[SHOmniAuth providerValue:SHOmniAuthProviderValueSecret forProvider:self.provider]
-                                              ];
-  
-  [linkedInClient authorizeUsingOAuthWithRequestTokenPath:@"uas/oauth/requestToken"
-                                    userAuthorizationPath:@"uas/oauth/authorize"
-                                              callbackURL:[NSURL URLWithString:
-                                                           [SHOmniAuth providerValue:SHOmniAuthProviderValueCallbackUrl
-                                                                         forProvider:self.provider]]
-                                          accessTokenPath:@"uas/oauth/accessToken"
-                                             accessMethod:@"POST"
-                                                    scope:[SHOmniAuth providerValue:SHOmniAuthProviderValueScope
-                                                                        forProvider:self.provider]
-                                                  success:^(AFOAuth1Token *accessToken, id responseObject) {
-                                               //Remove observer!
-                                               SHAccountCredential * credential = [[SHAccountCredential alloc]
-                                                                                   initWithOAuthToken:accessToken.key
-                                                                                   tokenSecret:accessToken.secret];
-                                               
-                                               account.credential = credential;
-                                               [SHOmniAuthLinkedIn updateAccount:account withCompleteBlock:completionBlock];
-                                               
-                                             } failure:^(NSError *error) {
-                                               completionBlock(nil, nil, error, NO);
-                                             }];
-  
+  [self performLoginForAccount:account withCompleteBlock:completionBlock];
+}
+
++(void)performLoginForAccount:(SHAccount *)account withCompleteBlock:(SHOmniAuthAccountResponseHandler)completeBlock {
+    AFOAuth1Client *  linkedInClient = [[AFOAuth1Client alloc]
+                                        initWithBaseURL:
+                                        [NSURL URLWithString:@"https://api.linkedin.com/"]
+                                        key:[SHOmniAuth providerValue:SHOmniAuthProviderValueKey forProvider:self.provider]
+                                        secret:[SHOmniAuth providerValue:SHOmniAuthProviderValueSecret forProvider:self.provider]
+                                        ];
+
+    [linkedInClient authorizeUsingOAuthWithRequestTokenPath:@"uas/oauth/requestToken"
+                                      userAuthorizationPath:@"uas/oauth/authorize"
+                                                callbackURL:[NSURL URLWithString:
+                                                             [SHOmniAuth providerValue:SHOmniAuthProviderValueCallbackUrl
+                                                                           forProvider:self.provider]]
+                                            accessTokenPath:@"uas/oauth/accessToken"
+                                               accessMethod:@"POST"
+                                                      scope:[SHOmniAuth providerValue:SHOmniAuthProviderValueScope
+                                                                          forProvider:self.provider]
+                                                    success:^(AFOAuth1Token *accessToken, id responseObject) {
+                                                        //Remove observer!
+                                                        SHAccountCredential * credential = [[SHAccountCredential alloc]
+                                                                                            initWithOAuthToken:accessToken.key
+                                                                                            tokenSecret:accessToken.secret];
+
+                                                        account.credential = credential;
+                                                        [SHOmniAuthLinkedIn updateAccount:account withCompleteBlock:completeBlock];
+
+                                                    } failure:^(NSError *error) {
+                                                        completeBlock(nil, nil, error, NO);
+                                                    }];
 }
 
 
@@ -125,45 +128,41 @@
       [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error) {
         NSDictionary * response = nil;
         if(responseData) response =  [NSJSONSerialization JSONObjectWithData:responseData options:0 error:nil];
-        
+
         if(error || [response[@"status"] integerValue] == 400 ){
-          dispatch_async(dispatch_get_main_queue(), ^{ completeBlock(nil, nil, error, NO); });
+          [self performLoginForAccount:theAccount withCompleteBlock:completeBlock];
           return;
         }
-        
-        
-        
+
         theAccount.username = [NSString stringWithFormat:@"%@_%@", response[@"firstName"], response[@"lastName"]];
         theAccount.identifier = response[@"id"];
-        
+
         [accountStore saveAccount:theAccount withCompletionHandler:^(BOOL success, NSError *error) {
           NSMutableDictionary * fullResponse = response.mutableCopy;
           id<accountPrivate> privateAccount = (id<accountPrivate>)theAccount;
           fullResponse[@"oauth_token"] = privateAccount.credential.token;
           fullResponse[@"oauth_token_secret"] = privateAccount.credential.secret;
-          
-          
+
           dispatch_async(dispatch_get_main_queue(), ^{ completeBlock((id<account>)theAccount, [self authHashWithResponse:fullResponse], error, success); });
         }];
-        
+
       }];
-      
-    }
-    else
+
+    } else {
       dispatch_async(dispatch_get_main_queue(), ^{ completeBlock((id<account>)theAccount, nil, error, granted); });
-    
+    }
   }];
-  
+
 }
 
 +(NSMutableDictionary *)authHashWithResponse:(NSDictionary *)theResponse; {
-  
+
   NSString * name = [NSString stringWithFormat:@"%@ %@", theResponse[@"firstName"], theResponse[@"lastName"]];
   NSMutableDictionary * omniAuthHash = @{@"auth" :
                                   @{@"credentials" : @{@"secret" : NSNullIfNil(theResponse[@"oauth_token_secret"]),
                                                      @"token"  : NSNullIfNil(theResponse[@"oauth_token"])
                                                      }.mutableCopy,
-                                  
+
                                   @"info" : @{@"description"  : NSNullIfNil(theResponse[@"headline"]),
                                               @"email"        : NSNullIfNil(theResponse[@"email"]),
                                               @"first_name"   : NSNullIfNil(theResponse[@"firstName"]),
@@ -174,7 +173,7 @@
                                               @"name"         : NSNullIfNil(name),
                                               @"urls"         : @{@"public_profile" : NSNullIfNil(theResponse[@"publicProfileUrl"])
                                                                   }.mutableCopy,
-                                              
+
                                               }.mutableCopy,
                                   @"provider" : @"linkedin",
                                   @"uid"      : NSNullIfNil(theResponse[@"id"]),
@@ -182,10 +181,10 @@
                                     }.mutableCopy,
                                   @"email"    : NSNullIfNil(theResponse[@"email"]),
                                   }.mutableCopy;
-  
-  
+
+
   return omniAuthHash;
-  
+
 }
 
 
