@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   name         = "SHOmniAuthLinkedIn"
   url          = "https://github.com/seivan/#{name}"
   git_url      = "#{url}.git"
-  version      = "0.2.4"
+  version      = "0.2.5"
   source_files = "#{name}/**/*.{h,m}"
 
   s.name         = name
@@ -15,10 +15,10 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://github.com/seivan/SHOmniAuthLinkedIn"
 
-  s.license      = {:type => 'MIT' } 
+  s.license      = 'MIT'
   s.author       = { "Seivan Heidari" => "seivan.heidari@icloud.com" }
   
-  s.source       = { :git => "https://github.com/seivan/SHOmniAuthLinkedIn.git", :tag => version}
+  s.source       = { :git => git_url, :tag => version}
   s.platform     = :ios, '5.0'
 
   s.source_files = source_files
