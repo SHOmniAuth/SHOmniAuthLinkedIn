@@ -164,7 +164,7 @@
                                                      }.mutableCopy,
 
                                   @"info" : @{@"description"  : NSNullIfNil(theResponse[@"headline"]),
-                                              @"email"        : NSNullIfNil(theResponse[@"email"]),
+                                              @"email"        : NSNullIfNil(theResponse[@"emailAddress"]),
                                               @"first_name"   : NSNullIfNil(theResponse[@"firstName"]),
                                               @"last_name"    : NSNullIfNil(theResponse[@"lastName"]),
                                               @"headline"     : NSNullIfNil(theResponse[@"headline"]),
